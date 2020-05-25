@@ -1,0 +1,29 @@
+
+IMPORTANT
+
+rw.jl defines Rw and New and includes their updates, updateRW for either
+
+ou_process.jl defines the ou process and makeGetReward for the outlier rewards
+
+soft_max.jl has a makeSoftMax function for the soft max
+
+background.jl defines the p(r) used in the new rw rule
+
+LESS IMPORTANT
+
+rw_process.jl runs a rw reward process counting rewards and rewards for the optimial process
+
+rw_out_process.jl like rw_process but with outliers
+
+best_eta_rw.jl does an eta sweep for the ou process without outliers
+
+best_eta_rw_out.jl does an eta sweep for the ou process with outliers
+
+best_eta_new_out.jl does an eta sweep for the ou process with outliers and the new rw rule
+
+toy.jl code for testing and playing with the processes
+
+TEST
+
+test_out.jl
+test_get_reward.jl

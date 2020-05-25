@@ -1,7 +1,7 @@
 
 #rw reward process for testing
 
-function rw_process(ou1,ou2,rw1,rw2,softMax,tMax)
+function rw_process(ou1,ou2,rw1,rw2,getReward1,getReward2,softMax,tMax)
 
     choiceReward=0
     bestReward=0
@@ -9,19 +9,22 @@ function rw_process(ou1,ou2,rw1,rw2,softMax,tMax)
     t=0
 
     while t<tMax
-    
+
+        reward1=getReward1()
+        reward2=getReward2()
+
         if softMax(rw1.r,rw2.r)==1
-            choiceReward+=ou1.r
-            updateRw(rw1,ou1.r)
+            choiceReward+=reward1
+            updateRw(rw1,reward1)
         else
-            choiceReward+=ou2.r
-            updateRw(rw2,ou2.r)
+            choiceReward+=reward2
+            updateRw(rw2,reward2)
         end
         
         if softMax(ou1.r,ou2.r)==1
-            bestReward+=ou1.r
+            bestReward+=reward1
         else
-            bestReward+=ou2.r
+            bestReward+=reward2
         end
         
         ouStep(ou1)
