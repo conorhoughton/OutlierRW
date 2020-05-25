@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper]{scrartcl}
+\typearea{10}
+
+
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+
+\begin{document}
+
+
+So in this version the agent associates a reward $r_i$ and a bias
+$b_i$ with each of two options; the aim is to use $r_i$ to learn the
+routine rewards and $b_i$ to learn both the outlier rewards and
+rewards that are not temporally bound to the choice. In this example we will
+concentrate on the former case, outlier rewards.
+
+When making a choice the agent should decide based on the total
+expected reward $r_i+b_i$ and so it is this that goes into the soft
+max choice function. However, in the update to $r_i$ only the
+deviation between the reward and $r_i$ is considered; the update rule
+is designed to only learn from non-outlier rewards, so
+\begin{equation}
+  r_i\rightarrow r_i+\eta_d p(r)(r-r_i)
+\end{equation}
+where $r$ is the actual reward.  However, throughout the day the way
+the reward differs from expectation is tallied up, this expectation,
+of course, includes the bias, so
+\begin{equation}
+  \delta r\rightarrow r-r_i-b_i
+\end{equation}
+
+At night the bias is adjusted based on the excess reward for the day;
+some of the events are revisited and the $b_i$ of the choice made
+adjusted so that the bias can account for this excess
+\begin{equation}
+  b_i\rightarrow b_i+\eta_n \frac{\delta r}{n}
+\end{equation}
+where, $n$ is the total number of events of the day. The revisited
+events are selected randomly from the events of the day with a
+probability weighted by their surprisingness, in this case measured by
+$-\log{p(r)}$, where $r$ was the reward for that event.
+
+\end{document}
